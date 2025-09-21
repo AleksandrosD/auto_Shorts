@@ -16,8 +16,8 @@ print("Transcription completed!")
 video = VideoFileClip(video_file)
 
 subtitle_clips = []
-words_per_clip = 3  # max words per subtitle
-max_gap = 0.5       # max gap between words in a mini-phrase (seconds)
+words_per_clip = 3  
+max_gap = 0.5       
 
 for segment in result["segments"]:
     words = segment.get("words", [])
@@ -36,7 +36,7 @@ for segment in result["segments"]:
         if phrase_end - phrase_start > 5:  # optional max phrase duration
             phrase_end = phrase_start + 5
 
-        txt_clip = (TextClip(text=phrase_text, font_size=24, color='white')
+        txt_clip = (TextClip(text=phrase_text, font_size=24,size=video.size, method='caption', color='white')
                     .with_position('center')
                     .with_start(phrase_start)
                     .with_end(phrase_end))
